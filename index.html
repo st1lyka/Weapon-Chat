@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link rel="stylesheet" href="style.css">
+    <title>Weapon Chat</title>
+
+</head>
+<body>
+<div class="container">
+    <h1>Weapon Chat</h1>
+    <input type="text" id="userInput" placeholder="Введите запрос" />
+    <button onclick="prompt()">Отправить</button>
+    <p id="responseBox">Ответ появится здесь.</p>
+</div>
+<script>
+    const promptHeader = "Ты чат-бот, отвечай только на тему оружия, отклоняй любые другие темы"
+    chatBox.scrollTop = chatBox.scrollHeight;
+
+    async function prompt() {
+        const userInput = document.getElementById("userInput").value;
+        const responseBox = document.getElementById("responseBox");
+        responseBox.innerText = "Ожидание ответа...";
+
+        responseBox.innerText = await sendRequest(userInput)
+    }
+
+    async function sendRequest(userInput) {
+        const requestBody = {
+            model: "mistral",
+            prompt: promptHeader + '\n Запрос: ' + userInput
+        };
+
+        try {
+            const response = await fetch("http://localhost:11434/api/generate", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(requestBody)
+            });
+
+            if (response.ok) {
+                const data = await response.text()
+
+                let answer = ""
+
+                data.split('\n').forEach(token => {
+                    if (token.length === 0)
+                        return;
+
+                    const tokenData = JSON.parse(token)
+
+                    answer += tokenData.response
+                })
+
+                return answer;
+            } else {
+                return "Ошибка сервера Ollama.";
+            }
+        } catch (error) {
+            return "Ошибка: " + error.message;
+        }
+    }
+</script>
+</body>
+</html>
