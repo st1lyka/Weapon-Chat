@@ -1,66 +1,54 @@
 <!DOCTYPE html>
-<html lang="ru">
-<head>
+<html lang="ru" xmlns="http://www.w3.org/1999/html">
+
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Ollama GPT</title>
     <link rel="stylesheet" href="style.css">
-    <title>Weapon Chat</title>
+    <script src="./script.js"></script>
 
 </head>
 <body>
-<div class="container">
-    <h1>Weapon Chat</h1>
-    <input type="text" id="userInput" placeholder="Введите запрос" />
-    <button onclick="prompt()">Отправить</button>
-    <p id="responseBox">Ответ появится здесь.</p>
+
+<!-- Заголовок страницы -->
+<div class="header">
+    <img src="icon2.svg" alt="Icon" width="50" height="50"/>
+
+    Weapon GPT
 </div>
-<script>
-    const promptHeader = "Ты чат-бот, отвечай только на тему оружия, отклоняй любые другие темы"
-    chatBox.scrollTop = chatBox.scrollHeight;
 
-    async function prompt() {
-        const userInput = document.getElementById("userInput").value;
-        const responseBox = document.getElementById("responseBox");
-        responseBox.innerText = "Ожидание ответа...";
+<!-- Основной контейнер чата -->
+<div class="chat-container">
+    <div class="chat-box" id="chatBox">
+        <div class="message bot-message">Привет! Задавай вопросы об истории оружия или другой теме!</div>
+    </div>
+    <input type="text" id="userInput" placeholder="Введите ваш запрос..." onkeydown="if(event.key === 'Enter') prompt()"/>
+    <button onclick="prompt()">Отправить
+        <img src="icon.svg" alt="Icon" width="25" height="25"/>
+    </button>
+</div>
 
-        responseBox.innerText = await sendRequest(userInput)
-    }
+<!-- Изображение для привлечения внимания -->
+<!-- Кнопка эмодзи снизу -->
+<div class="emoji-picker-container">
+    <div class="emoji-button-bottom" onclick="toggleEmojiPicker()">😊</div>
+</div>
 
-    async function sendRequest(userInput) {
-        const requestBody = {
-            model: "mistral",
-            prompt: promptHeader + '\n Запрос: ' + userInput
-        };
+<!-- Контейнер с эмодзи -->
+<div class="emoji-container" id="emojiContainer">
+    <span onclick="insertEmoji('😊')">😊</span>
+    <span onclick="insertEmoji('💥')">💥</span>
+    <span onclick="insertEmoji('🔥')">🔥</span>
+    <span onclick="insertEmoji('🛡️')">🛡️</span>
+    <span onclick="insertEmoji('⚔️')">⚔️</span>
+</div>
 
-        try {
-            const response = await fetch("http://localhost:11434/api/generate", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(requestBody)
-            });
 
-            if (response.ok) {
-                const data = await response.text()
 
-                let answer = ""
 
-                data.split('\n').forEach(token => {
-                    if (token.length === 0)
-                        return;
 
-                    const tokenData = JSON.parse(token)
 
-                    answer += tokenData.response
-                })
 
-                return answer;
-            } else {
-                return "Ошибка сервера Ollama.";
-            }
-        } catch (error) {
-            return "Ошибка: " + error.message;
-        }
-    }
-</script>
+
 </body>
 </html>
