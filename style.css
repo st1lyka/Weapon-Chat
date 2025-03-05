@@ -1,3 +1,4 @@
+/* Основные стили для страницы */
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f6f9;
@@ -7,21 +8,16 @@ body {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-.header {
-    width: 100%;
-    text-align: center;
-    padding: 20px 0;
-    background-color: #4CAF50;
+/* Стиль для темной темы */
+body.dark-theme {
+    background-color: #121212;
     color: white;
-    font-size: 32px;
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 20px;
 }
+
+
 
 .header svg {
     margin-right: 10px;
@@ -41,9 +37,18 @@ body {
     height: 70vh;
     overflow: hidden;
     margin-top: 25px;
+    transition: background-color 0.3s;
+}
+
+/* Темная тема для контейнера чата */
+body.dark-theme .chat-container {
+    background-color: #333;
 }
 
 .chat-box {
+    display: flex;
+    flex-direction: column;
+
     flex-grow: 1;
     overflow-y: auto;
     margin-bottom: 20px;
@@ -60,6 +65,12 @@ body {
     display: inline-block;
     font-size: 16px;
     line-height: 1.5;
+}
+
+/* Темная тема для сообщений */
+body.dark-theme .message {
+    background-color: #555;
+    color: #fff;
 }
 
 .user-message {
@@ -96,7 +107,25 @@ button {
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: background-color 0.3s;
 }
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Темная тема для кнопки отправить */
+body.dark-theme button {
+    background-color: #333;
+    color: white;
+}
+
+button svg {
+    margin-left: 10px;
+    width: 20px;
+    height: 20px;
+}
+
 .emoji-container {
     display: none;
     position: absolute;
@@ -108,6 +137,13 @@ button {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
     z-index: 10;
 }
+
+/* Темная тема для эмодзи */
+body.dark-theme .emoji-container {
+    background-color: #333;
+    border: 1px solid #444;
+}
+
 .emoji-container span {
     font-size: 25px;
     cursor: pointer;
@@ -119,13 +155,14 @@ button {
     border-radius: 5px;
 }
 
-/* Добавим кнопку для эмодзи снизу */
+/* Кнопка для эмодзи снизу */
 .emoji-picker-container {
     width: 100%;
     display: flex;
     justify-content: center;
     margin-top: 10px;
 }
+
 .emoji-button-bottom {
     font-size: 28px;
     cursor: pointer;
@@ -135,23 +172,72 @@ button {
     padding: 10px;
 }
 
-button:hover {
-    background-color: #45a049;
+/* Темная тема для кнопки эмодзи */
+body.dark-theme .emoji-button-bottom {
+    background-color: #444;
+    color: white;
 }
-
-button svg {
-    margin-left: 10px;
-    width: 20px;
-    height: 20px;
-}
-
-.image {
+.header {
     width: 100%;
-    max-width: 150px;
-    margin: 10px auto;
+    text-align: center;
+    padding: 20px 0;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
+    display: flex;
+    justify-content: space-between;  /* Изменяем выравнивание */
+    align-items: center;
 }
 
-.image img {
+
+/* Для кнопки переключения темы */
+.theme-toggle-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;  /* Уменьшаем размер шрифта */
+    cursor: pointer;
+    padding: 5px;  /* Уменьшаем внутренние отступы */
+    border-radius: 50%;  /* Делаем кнопку круглой */
+    width: 50px;   /* Устанавливаем фиксированную ширину */
+    height: 50px;  /* Устанавливаем фиксированную высоту */
+    display: flex;  /* Для выравнивания содержимого по центру */
+    justify-content: center;  /* Центрируем содержимое */
+    align-items: center;  /* Центрируем содержимое */
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+/* Добавим стили для кнопки очистки чата */
+.clear-chat-btn-container {
     width: 100%;
-    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.clear-chat-btn {
+    background-color: #f44336;  /* Красный цвет */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.clear-chat-btn:hover {
+    background-color: #d32f2f;
+}
+.clear {
+ margin-top: 10px;
+    background: grey;
+}
+.give{
+    background-color: grey;
 }

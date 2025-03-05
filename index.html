@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html lang="ru" xmlns="http://www.w3.org/1999/html">
-
+<head>
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Ollama GPT</title>
+    <title>Weapon GPT</title>
     <link rel="stylesheet" href="style.css">
-    <script src="./script.js"></script>
-
+    <script src="./script.js" defer></script>
 </head>
 <body>
 
 <!-- Заголовок страницы -->
 <div class="header">
-    <img src="icon2.svg" alt="Icon" width="50" height="50"/>
+    ᠌᠌ ᠌ ᠌ ᠌ ᠌ ᠌
 
-    Weapon GPT
+    <div class="logo">
+        <img src="icon2.svg" alt="Icon" width="50" height="50"/>
+        <span>Weapon GPT</span>
+    </div>
+    <button onclick="toggleTheme()"  class="theme-toggle-btn">🌙</button>
 </div>
 
 <!-- Основной контейнер чата -->
@@ -23,12 +26,15 @@
         <div class="message bot-message">Привет! Задавай вопросы об истории оружия или другой теме!</div>
     </div>
     <input type="text" id="userInput" placeholder="Введите ваш запрос..." onkeydown="if(event.key === 'Enter') prompt()"/>
-    <button onclick="prompt()">Отправить
+    <button class="give" onclick="prompt()">Отправить
         <img src="icon.svg" alt="Icon" width="25" height="25"/>
     </button>
+    <button class="clear" onclick="clearChat()">Очистить
+        <img class="clear1" src="clear1.png" alt="Icon" width="25" height="25"/>
+    </button>
+
 </div>
 
-<!-- Изображение для привлечения внимания -->
 <!-- Кнопка эмодзи снизу -->
 <div class="emoji-picker-container">
     <div class="emoji-button-bottom" onclick="toggleEmojiPicker()">😊</div>
@@ -42,13 +48,6 @@
     <span onclick="insertEmoji('🛡️')">🛡️</span>
     <span onclick="insertEmoji('⚔️')">⚔️</span>
 </div>
-
-
-
-
-
-
-
 
 </body>
 </html>
